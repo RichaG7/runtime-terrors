@@ -197,6 +197,16 @@ fetch('http://localhost:4444/citydata?city='+selCity).then(d=>d.json().then(data
       td.innerHTML= `<b>${city}</b>`
       tr.appendChild(td)
       tbl.appendChild(tr);
+  
+  tour_table = document.getElementById('to-do-list')
+  tour_table.innerHTML="<thead><tr><th>Top10 Tours in the City</th></thead>"
+  data.tourdata.result.forEach(city => { 
+    tr = document.createElement('tr')
+    td = document.createElement('td')
+    td.innerHTML= `<b>${city}</b>`
+    tr.appendChild(td)
+    tbl.appendChild(tr);
+
   });
   resCard1 = document.getElementById('card_id_1')
   resCard2 = document.getElementById('card_id_2')
@@ -218,9 +228,9 @@ fetch('http://localhost:4444/citydata?city='+selCity).then(d=>d.json().then(data
     td = document.createElement('td')
     td.innerHTML= `<b>${bar}</b>`
     tr.appendChild(td)
-    tour_table.appendChild(tr);
+    tour_table.appendChild(tr):
   });
-}));
+})):
 
 
 

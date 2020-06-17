@@ -50,7 +50,13 @@ def city():
             del city['_id']
             results.append(city)
 
+<<<<<<< HEAD
     datadic = {"top5":top5, "top5pubs": top5pubs, "tourdata":results}
+=======
+    
+
+    datadic = {"top5":top5, "tourdata":results }
+>>>>>>> c8a18f4435888246dccd88b672f8eeea6be05da4
 
     return(datadic)
 
