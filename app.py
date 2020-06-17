@@ -11,7 +11,12 @@ CORS(app)
 # Use PyMongo to establish Mongo connection
 mongo = PyMongo(app, uri="mongodb://localhost:27017/cityDB")
 
+# Route for home page
 
+@app.route('/')
+def index():
+    return render_template('/index.html')
+    
 # Route that will trigger the scrape function
 
 @app.route("/citydata", methods=["GET", "POST"])
