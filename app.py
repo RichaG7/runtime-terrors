@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, jsonify, request
 from flask_pymongo import PyMongo
-import os
 from flask_cors import CORS
+import os
+
 
 # Create an instance of Flask
 app = Flask(__name__)
