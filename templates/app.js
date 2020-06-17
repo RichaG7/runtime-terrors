@@ -200,7 +200,7 @@ function cityData(selCity) {
     resCard3 = document.getElementById('card_id_3')
     resCard4 = document.getElementById('card_id_4')
     resCard5 = document.getElementById('card_id_5')
-   console.log(data.top5pubs)
+    console.log(data.top5pubs)
     resCard1.innerHTML = data.top5pubs.result[0][0]
     resCard2.innerHTML = data.top5pubs.result[0][1]
     resCard3.innerHTML = data.top5pubs.result[0][2]
