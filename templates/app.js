@@ -61,6 +61,7 @@ function data_log() {
   } else {
     attribute = event.target.value;
     selCity = destination();
+    cityData(selCity);
     showDiv();
     // cityfunction()
   };
@@ -185,7 +186,8 @@ beersankeybuilder();
 cocktailsankeybuilder();
 
 // fetch city data for busiest months, tour data (bars and restaurant recommendations) from flask app.py
-fetch('/citydata').then(d=>d.json().then(data=>{
+function cityData(selCity) {
+fetch('http://localhost:4444/citydata?city='+selCity).then(d=>d.json().then(data=>{
   tbl = document.getElementById('busyMonthsTable')
   tbl.innerHTML="<thead><tr><th>Busiest Months in 2017, by Flight Arrivals</th></thead>"
   console.log(data) 
@@ -196,6 +198,34 @@ fetch('/citydata').then(d=>d.json().then(data=>{
       tr.appendChild(td)
       tbl.appendChild(tr);
   });
+  resCard1 = document.getElementById('card_id_1')
+  resCard2 = document.getElementById('card_id_2')
+  resCard3 = document.getElementById('card_id_3')
+  resCard4 = document.getElementById('card_id_4')
+  resCard5 = document.getElementById('card_id_5')
+ console.log(data.top5pubs)
+  resCard1.innerHTML = data.top5pubs.result[0][0]
+  resCard2.innerHTML = data.top5pubs.result[0][1]
+  resCard3.innerHTML = data.top5pubs.result[0][2]
+  resCard4.innerHTML = data.top5pubs.result[0][3]
+  resCard5.innerHTML = data.top5pubs.result[0][4]
+
+
+  tour_table = document.getElementById('to-do-list')
+  tour_table.innerHTML=`<thead><tr><th>Top10 Tours in the ${selCity}</th></thead>`
+  data.tourdata[0].top10_tour.forEach(bar => { 
+    tr = document.createElement('tr')
+    td = document.createElement('td')
+    td.innerHTML= `<b>${bar}</b>`
+    tr.appendChild(td)
+    tour_table.appendChild(tr);
+  });
 }));
+
+
+
+
+};
+
 
 // MOE & Marissa your code will go here!

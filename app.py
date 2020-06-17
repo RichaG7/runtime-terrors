@@ -1,10 +1,11 @@
 from flask import Flask, render_template, redirect, jsonify, request
 from flask_pymongo import PyMongo
 import os
-
+from flask_cors import CORS
 
 # Create an instance of Flask
 app = Flask(__name__)
+CORS(app)
 
 # Use PyMongo to establish Mongo connection
 mongo = PyMongo(app, uri="mongodb://localhost:27017/cityDB")
@@ -26,6 +27,16 @@ def city():
             del item['_id']
             top5["result"].append(item[selcity])
             i = i + 1
+
+    ##bringing in pub data
+    pub_results = mongo.db.pubs.find({selcity: { "$exists": True }})
+    top5pubs = {"result": []}
+    i = 0
+    for pub in pub_results:
+        if (i < 5):
+            del pub['_id']
+            top5pubs["result"].append(pub[selcity])
+            i = i + 1
  
     #bring in the city data
 
@@ -39,7 +50,7 @@ def city():
             del city['_id']
             results.append(city)
 
-    datadic = {"top5":top5, "tourdata":results}
+    datadic = {"top5":top5, "top5pubs": top5pubs, "tourdata":results}
 
     return(datadic)
 
@@ -48,3 +59,4 @@ if __name__ == "__main__":
     app.run(host=os.getenv('IP', '0.0.0.0'), 
             port=int(os.getenv('PORT', 4444)),
             debug=True)
+
