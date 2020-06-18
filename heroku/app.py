@@ -10,6 +10,7 @@ CORS(app)
 
 # Use PyMongo to establish Mongo connection
 mongo = PyMongo(app, uri="mongodb://localhost:27017/cityDB")
+mongo2 = PyMongo(app, uri="mongodb://localhost:27017/sankey_data")
 
 # Route for home page
 
